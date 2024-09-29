@@ -1,0 +1,76 @@
+aside {
+    height: 100vh;
+}
+aside .top {
+    margin-top: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+aside .logo {
+    display: flex;
+
+}
+aside .top .logo h1 {
+    /* margin-left:0.2rem; */
+    letter-spacing: 0.2rem;
+    font-size: 1.3rem;
+    background-image: url('../assets/sky.png');
+    color: transparent;
+    background-position: center;
+    background-clip: text;
+}
+aside .top  .closse{
+    padding-top: 0.4rem;
+    
+    
+}
+aside .sidebar {
+    height: 86vh;
+    position: relative;
+    top: 1.8rem;
+    display: flex;
+    flex-direction: column;
+}
+aside .sidebar a h3 {
+    font-weight: 300;
+    font-size: 1.2rem;
+}
+aside .sidebar a {
+    display: flex;
+    margin-left: 2rem;
+    gap: 1.2rem;
+    height: 5rem;
+    align-items: center;
+    position: relative;
+    transition:  0.5s ease;
+
+}
+aside .sidebar a span , .closse {
+    transition:  0.5s ease;
+    font-size: 1.6rem;
+    color: rgb(87, 86, 86);
+   
+}
+aside .sidebar a:hover span {
+    margin-left: 1rem;
+}
+
+aside .sidebar a:last-child  {
+    position: absolute;
+    bottom: 5rem;
+   width: 88%;
+}
+
+aside .sidebar a.active {
+    border-left: 0.42rem solid #888686;
+    margin-left: 0;
+    background-color: #eae8e8;
+    background-color: #e6e5e3;
+
+
+
+}
+aside .sidebar a.active span{
+    margin-left: 1rem;
+}

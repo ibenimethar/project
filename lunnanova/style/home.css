@@ -1,0 +1,297 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+*{  
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Poppins, sans-serif;
+}
+body{
+   background-color: black;
+}
+
+#web-name p  {
+    color: white;
+    background-image: url('../assets/sky.png');
+    color: transparent;
+    background-position: center;
+    font-size:25px;
+    font-family: 'Arial', sans-serif;
+    background-clip: text;
+    letter-spacing:2px;
+    font-weight: 600;
+    }
+    #web-name span{
+    margin-left:  2px;
+    margin-right: 2px;
+    position: relative;
+    display: inline-block; 
+    width: 0.8em;
+    height: 0.8em;
+    background-color: rgb(191, 184, 174);
+    border-radius: 50%;
+    box-shadow: 0 0 9px rgba(255, 255, 255, 0.8), 0 0 25px rgba(255, 255, 255, 0.5),0 0 25px rgba(255, 255, 255, 0.3);
+    top: 3px; 
+    transition: transform 0.3s;}
+.nav{
+    overflow:hidden;
+    top:0;
+    position: sticky;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    height: 100px;
+    line-height: 100px;
+    z-index:45;
+ 
+
+
+}
+.nav-menu ul{
+    display: flex;
+}
+.nav-menu ul li{
+    list-style-type: none;
+}
+.nav-menu ul li .link{
+    padding: auto;
+    text-decoration: none;
+    font-weight: 500;
+    color: #fff;
+    margin: 0 27px;
+}
+.link:hover, .active{
+    border-bottom: 2px solid #fff;
+}
+.nav-button .btn{
+    width: 140px;
+    height: 40px;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.4);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+.btn:hover{
+    background: rgba(255, 255, 255, 0.3);
+}
+#registerBtn{
+    margin-left:19px;
+}
+.btn.btn.right-btn{
+    background: rgba(255, 255, 255, 0.7);
+}
+.btn,.btn.right-btn:hover{
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.container-two {
+    position: relative;
+    margin: 50px auto;
+    margin-top: 50px;
+    width: 90vw;
+    min-height: 76vh;
+    border-radius: 15px;
+    box-shadow: 3px 3px 25px rgba(160, 154, 154, 0.2); 
+    background-image: url('../assets/s.jpeg');
+    border: none;
+    
+    
+    }
+    .up {
+        backdrop-filter: blur(3px);
+    /* overflow:hidden; */
+    width: 66%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); 
+    position: absolute;
+    top: 0;
+    right:0;
+    border-radius: 10px 10px 10px 130px;
+    box-shadow: 3px 3px 15px rgba(160, 154, 154, 0.2), 0 0 25px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }   
+    .start{
+        position: absolute;
+        top: 20%;
+        left:2%;
+        display: flex;
+        width: 30%;
+        height: 70%;
+        text-align: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+  .start p{
+    color:rgb(230, 230, 230);
+    font-size:23px;
+    text-shadow: 
+    0 0 10px rgba(200, 200, 200, 0.7), 
+    0 0 10px rgba(195, 194, 194, 0.7), 
+    0 0 41px rgba(180, 180, 180, 0.5);
+    font-family: 'Playfair Display', serif;  
+    font-style: italic;
+    font-weight: 10;
+  padding: 10px;
+  
+    }
+.form-box{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:80%;
+    height:90%;
+    overflow: hidden;
+    /* z-index: 2; */
+    /* background-color: #9d8d8d; */
+}
+.login-container{
+    position: absolute;
+    /* left:20px; */
+    left:4px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin-left:4%;
+    transition: .4s ease-in-out;
+
+ 
+}
+.register-container{
+    margin-right:4%;
+    position: absolute;
+    right: -98%;
+    width:90%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    transition: .4s ease-in-out;
+}
+.form-header span{
+    color: #fff;
+    font-size: small;
+    padding:1%;
+    display: flex;
+    justify-content: center;
+}
+.form-header span a{
+    font-weight: 500;
+    color: #fff;
+    margin-left: 5px;
+    text-decoration: none;
+}
+.form-header span a:hover{
+ color: dimgray;
+
+}
+.form-header span a:hover{
+    text-decoration:underline rgb(206, 205, 202);
+}
+
+
+header{
+    color: #b7a7a7;
+    font-size: 33px;
+    text-align: center;
+    padding: 1% 0 3% 0;
+    background-image: url('../assets/sky.png');
+    color: transparent;
+    background-position: center;
+    font-family: 'Arial', sans-serif;
+    background-clip: text;
+    font-weight: 600;
+}
+.form-item{
+    display: flex;
+    gap:5%;
+    justify-content: center;
+    /* background-color: #b7a7a7; */
+
+} 
+/* .form-item input{
+    width: 125%;
+} */
+
+.form-input{
+    font-size: 19px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    height: 60px;
+    width: 100%;
+    padding: 0 15px 0 50px;
+    outline: none;
+    border: none;
+    border-radius: 30px;
+}
+.form-input:hover, .form-input:focus{
+    background: rgba(255, 255, 255, 0.25);}
+    ::placeholder{
+        color: #fff;
+
+    }
+
+.form-group i{
+    position: relative;
+    top: -45px;
+    left: 17px;
+    color: #fff;
+}
+  
+.submit{
+    font-size: 19px;
+    font-weight: 500;
+    color: black;
+    height: 60px;
+    width: 100%;
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.submit:hover{
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
+}
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius:34px;
+    padding: 10px;
+    color: #333;
+    font-size: 17px;
+    text-decoration: none;
+}
+
+.google-logo {
+    margin-right:5px;
+    width: 24px; 
+   
+}
+.form-options{
+    display: flex;
+    justify-content: space-between;
+    color: #fff;
+    font-size: small;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+.form-options .one{
+    margin-left: 15px;
+    display: flex;
+    gap:10px;
+}
+.two  a{
+    text-decoration: none;
+    color: #fff;
+}
+.two  a:hover{
+    text-decoration: underline;
+}

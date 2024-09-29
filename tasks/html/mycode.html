@@ -1,0 +1,510 @@
+<style>    
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        text-decoration: none;
+    }
+    html {
+        font-size: 14px;
+    }
+    body {
+        width: 100vw;
+        height: 100vh;
+        font-size: 0.88rem;
+        font-family: poppins, sans-serif;
+        background-color: #dddada ;
+        /* background-color: #cfccc2; */
+        /* background-color: #d9d6d4; */
+        /* background-color: #e6e5e3; */
+        background-color: #d6d5d3;
+        /* background-color: #6f6b6b; */
+
+        overflow-x: hidden;
+    }
+    main{
+        display: grid;
+        grid-template-rows:13.4rem 11rem 6.8rem auto 2rem;
+    }
+
+    a {
+        color: rgb(22, 21, 21);
+    }
+    h3 {
+        font-size: 0.87rem;
+        color: rgb(22, 21, 21);
+    }
+    .container {
+        margin: 0 1.8rem;
+        width: 96%;
+        display: grid;
+        gap: 1.8rem;
+        grid-template-columns: 17rem auto 31rem;
+    }
+
+
+   
+
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/tasksoptions.css">
+    <link rel="stylesheet" href="../style/popuptasks.css">
+    <link rel="stylesheet" href="../style/datetime.css">
+    <link rel="stylesheet" href="../style/linecalendar.css">
+    <link rel="stylesheet" href="../style/sidenav.css">
+
+</head>
+<body>
+    <div class="container">
+        <aside>
+            <div class="top">
+            <div class="logo">
+                <h1>LUNNANOVA</h1>
+            </div>
+            <div class="closse" id="close-btn">
+                <span class="material-symbols-outlined">close</span>
+            </div>
+            </div>
+            <div class="sidebar">
+                <a href="#" class="sidebar-link active">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <h3>tasks</h3>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <span class="material-symbols-outlined">calendar_month</span>
+                    <h3>calendar</h3>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <span class="material-symbols-outlined">table_chart</span>
+                    <h3>schedule</h3>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <span class="material-symbols-outlined">insights</span>
+                    <h3>goals</h3>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <span class="material-symbols-outlined">edit_note</span>
+                    <h3>notes</h3>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <span class="material-symbols-outlined">bar_chart_4_bars</span>
+                    <h3>review</h3>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <span class="material-symbols-outlined">pause_circle</span>
+                    <h3>backlog</h3>
+                </a>
+                <a href="#" class="sidebar-link">
+                    <span class="material-symbols-outlined">logout</span>
+                    <h3>logout</h3>
+                </a>
+            </div>
+        </aside>
+        <main>
+          <!-- header------------------------------------------------------------- -->
+            
+            <div class="date-container">
+                <div class="intro">
+                    <div class="hi">
+                        <h1 id="greeting" class="greeting"></h1>
+                        <div class="user">eva</div>
+                    </div>
+                     <h2 class="ready">The future belongs to those who prepare for it today. By planning wisely, you harness the power to shape your path and turn your dreams into achievements.</h2>
+                     <div class="durationup">
+                        <span class="material-symbols-outlined"> schedule</span>
+                        <h2 id="time" class="time"></h2>
+                     </div>
+                 </div>
+                <div class="today">
+                <div class="upptime">
+                    <div class="weekday" id="weekday"></div>
+                    <div class="Planner">'s Task Planner</div>
+                </div>
+                    <div class="date" id="date"></div>
+                    <div class="progress-bar">
+                        <div class="progress" id="progress"></div>
+                        <span class="progress-percentage" id="progressPercentage"></span>
+                       
+                </div>
+                </div>  
+
+            </div>
+            <div class="line-calender">
+                <div id="calendar" >
+                    <div id="month-navigation">
+                        <div id="month-names">
+                            <span id="prev-month-name" class="other-month"></span>
+                            <span id="current-month-name" class="current-month"></span>
+                            <span id="next-month-name" class="other-month"></span>
+                        </div>
+                    </div>
+                    <div class="dayz">
+                        <span  id="prev-month" class="material-symbols-outlined">arrow_left</span>
+                        <div id="calendar-days"></div>
+                        <span  id="next-month" class="material-symbols-outlined"> arrow_right</span>
+
+                    </div>
+                </div>
+            </div>
+            
+                <div class="task-options">
+                    <div class="options">
+                        <button class="add-task" id="create-task-btn">
+                            <h3 class="button-text">Create Task</h3>
+                            <h3 class="button-description">Add to your list</h3>
+                        </button>
+                        <button class="Important">
+                            <h3 class="button-text">Important</h3>
+                            <h3 class="button-description">Must-do tasks</h3>
+                        </button>
+                        <button class="Optional">
+                            <h3 class="button-text">Optional</h3>
+                            <h3 class="button-description">Can-do if time allows</h3>
+                        </button>
+                     <button class="Waiting">
+                        <h3 class="button-text">Waiting</h3>
+                        <h3 class="button-description">Tasks to reschedule or review later</h3>
+                    </button>
+                    </div>
+                </div>
+            
+                <div class="popup" id="task-popup">
+                   <div class="pop">
+                    <div class="headerpopup">
+                        <div class="popup-content">
+                            <div class="create-task-title-content">
+                                <div class="create-task-title">
+                                    <div  class="tas">
+                                        <span class="material-symbols-outlined"> task </span>
+                                    </div> 
+                                    <h1 class="title-task">Create New Task</h1>
+                                 
+                                </div>  
+                            </div>
+                           <div class="CloseButton">
+                                <div id="popup-close-btn" class="popupclosebtn">
+                                    <span class="material-symbols-outlined">close</span>
+                                    <h2 >CLOSE</h2>
+                                </div>
+                            </div>
+                                
+                           </div>
+                           <form class="form-add-task">
+                            <!---taskinput-->
+
+                            <div class="taskprincipale">
+                                <input type="text" id="task-title" name="task-title" placeholder="+ add task" >
+                             </div>
+                            <!---button-->
+
+                             <div class="button-tasks">
+                                <div  class="AddS" >
+                                 <span class="material-symbols-outlined"> add_task </span>
+                               </div>
+                               <div  class="grade" > 
+                                <span class="material-symbols-outlined">grade</span>
+                               </div>
+                               <div class="duration-timer">
+                                <span class="material-symbols-outlined">timer</span>
+                               </div>
+                               
+                            </div>
+                            <!---contant button-->
+                            <div class="popup-btns-content">
+                                <div class="triangle-btn"></div>
+                                <!--------triangle-->
+                                <div class="tasks-liste-btn">
+                                    <div id="subtasks" class="content-section-btn"> 
+                                        <div id="addSubtaskBtn">
+                                           
+                                            <div class="meansubstak">
+                                                <input type="text" class="create-substaks" name="task-title" placeholder="+ add subtask" >  </div>
+                                                <div class="button-add-substak">
+                                                    <button   onclick="addSubsTask()" type="button" id="add-subtask-btn"> Add Subtask</button>
+                                                </div>
+                                             
+                                        </div>
+                                        <div class="subtasks-container" id="subtasks-container">
+                               
+                                        </div>
+                                      
+                                    </div>
+
+                                    <!--------------->
+                                    <div id="durations" class="content-section-btn">
+                                        <div class="durations-content ">
+    
+                                            <div class="duration-inputs">
+                                                <div class="duration-inputs-grp">
+                                                    <label for="time-started">get started :</label>
+                                                    <input type="time" name="time-started" id="time-started">
+                                                </div>
+                                                <div class="duration-inputs-grp">
+                                                    <label for="duration-chrono">Duration:</label>
+                                                    <div class="custom-dropdown">
+                                                        <div class="dropdown-selected" id="dropdown-selected">Select duration</div>
+                                                        <div class="dropdown-options" id="dropdown-options">
+                                                          <div class="dropdown-option" data-value="5">5 min</div>
+                                                          <div class="dropdown-option" data-value="10">10 min</div>
+                                                          <div class="dropdown-option" data-value="15">15 min</div>
+                                                          <div class="dropdown-option" data-value="20">20 min</div>
+                                                          <div class="dropdown-option" data-value="30">30 min</div>
+                                                          <div class="dropdown-option" data-value="40">40 min</div>
+                                                          <div class="dropdown-option" data-value="50">50 min</div>
+                                                          <div class="dropdown-option" data-value="60">1 h</div>
+                                                          <div class="dropdown-option" data-value="90">1:30 h</div>
+                                                          <div class="dropdown-option" data-value="120">2 h</div>
+                                                          <div class="dropdown-option" data-value="150">2:30 h</div>
+                                                          <div class="dropdown-option" data-value="180"> 3 h</div>
+                                                          <div class="dropdown-option" data-value="240">4 h</div>
+                                                          <div class="dropdown-option" data-value="300">5 h</div>
+                                                          <div class="dropdown-option" data-value="360">6 h</div>
+                                                          <div class="dropdown-option" data-value="420">7 h</div>
+                                                          <div class="dropdown-option" data-value="480">8h</div>
+                                                        </div>
+                                                      </div>
+                                                
+                                                </div>
+                                                <div class="set-btn">
+                                                    <button class="valide-timer" type="button">set</button>
+                                                    </div>
+                                            </div>
+                                            <!-- <div class="affichage"> -->
+                                            <div class="time-duration-msg">
+                                                
+                                            </div>
+                                        <!-- </div> -->
+                                     
+                                        </div>
+                                    </div>
+                            
+                                    <div id="grades" class="content-section-btn">
+                                        <div class="grade-container">
+                                            <div class="category-container">
+
+                                                <p class="chose-category">Choose a category:</p>
+                                                <div class="category-btns">
+                                                    <button id="btn-im" class="category-btn" data-category="important">important</button>
+                                                <button id="btn-op" class="category-btn" data-category="optional">optional</button>
+                                                <button id="btn-wa" class="category-btn" data-category="waiting">waiting</button>
+                                                </div>
+                                              </div>
+                                              <div class="affichage">
+                                                
+                                              </div>
+                                              <!-- Display selected category -->
+                                              <p id="selected-category">Selected Category: None</p>
+                                        </div>
+
+                    
+                                    </div>
+                                    </div>
+                           </div>
+                           <button class="submitbtn" type="submit">
+                            <span class="material-symbols-outlined"> add_circle </span>
+                        </button> 
+                           </form> 
+                    </div>
+                   
+                       </div>
+                          
+                   </div>
+                   <div class="my-liste">
+
+                    <div class="triangle"></div>
+                    <div class="tasks-liste">
+                        <div id="important" class="content-section">Important tasks...</div>
+                        <div id="optional" class="content-section">Optional tasks...</div>
+                        <div id="wait" class="content-section">Wait tasks...</div>
+                       <style>
+                     
+                       </style>
+                        
+                        </div>
+                     </div>
+                    </main>
+                    </div>
+                
+              
+        
+       
+            
+
+
+
+
+<!-- 
+
+    </script>
+                   
+            <script>
+                document.querySelectorAll('.category-btn').forEach(function(button) {
+    button.addEventListener('click', function(event) {
+        // Prevent the form from submitting or the page from refreshing
+        event.preventDefault();
+
+        // Get the category value from the clicked button's data-category attribute
+        let selectedCategory = event.target.getAttribute('data-category');
+        
+        // Update the displayed selected category
+        document.getElementById('selected-category').textContent = 'Selected Category: ' + selectedCategory;
+        
+        // Highlight the selected button for better UX
+        document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('selected'));
+        event.target.classList.add('selected');
+
+        console.log('You selected category: ' + selectedCategory);
+    });
+});
+
+            </script>
+          -->
+    
+          <script>
+            document.getElementById('dropdown-selected').addEventListener('click', function() {
+  const options = document.getElementById('dropdown-options');
+  options.style.display = options.style.display === 'block' ? 'none' : 'block';
+});
+
+document.querySelectorAll('.dropdown-option').forEach(function(option) {
+  option.addEventListener('click', function() {
+    const selectedText = this.innerText;
+    const selectedValue = this.getAttribute('data-value');
+
+    document.getElementById('dropdown-selected').innerText = selectedText;
+    document.getElementById('dropdown-options').style.display = 'none';
+    
+    console.log('Selected value:', selectedValue);
+  });
+});
+
+            /********************************/
+            document.addEventListener('DOMContentLoaded', () => {
+    // Task creation popup handling
+    const createTaskBtn = document.getElementById('create-task-btn');
+    const taskPopup = document.getElementById('task-popup');
+    const closeBtn = document.getElementById('popup-close-btn');
+
+    createTaskBtn.addEventListener('click', () => {
+        taskPopup.style.display = 'block';
+    });
+
+    closeBtn.addEventListener('click', () => {
+        taskPopup.style.display = 'none';
+    });
+
+    // Form handling
+    const taskForm = document.querySelector('.form-add-task');
+    const taskTitleInput = document.getElementById('task-title');
+    let selectedCategory = '';
+
+    // Category selection buttons
+    document.querySelectorAll('.category-btn').forEach(function(button) {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+            selectedCategory = event.target.getAttribute('data-category');
+            document.getElementById('selected-category').textContent = 'Selected Category: ' + selectedCategory;
+
+            // Highlight the selected button
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('selected'));
+            event.target.classList.add('selected');
+        });
+    });
+
+    // Form submission handling
+    taskForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const taskTitle = taskTitleInput.value.trim();
+        const subtasksContainer = document.getElementById('subtasks-container');
+        const subtasks = subtasksContainer.querySelectorAll('.subtask-input');
+
+        if (taskTitle === '') {
+            alert('Task title is required');
+            return;
+        }
+
+        // Create task element
+        const taskElement = document.createElement('div');
+        taskElement.innerHTML = `<strong>${taskTitle}</strong>`;
+
+        // Add all subtasks
+        if (subtasks.length > 0) {
+            const subtaskList = document.createElement('ul');
+            subtasks.forEach(subtaskDiv => {
+                const subtaskItem = document.createElement('li');
+                subtaskItem.textContent = subtaskDiv.textContent;
+                subtaskList.appendChild(subtaskItem);
+            });
+            taskElement.appendChild(subtaskList);
+        }
+
+        // Append task to the correct category section
+        if (selectedCategory === 'important') {
+            document.getElementById('important').appendChild(taskElement);
+        } else if (selectedCategory === 'optional') {
+            document.getElementById('optional').appendChild(taskElement);
+        } else if (selectedCategory === 'waiting') {
+            document.getElementById('wait').appendChild(taskElement);
+        } else {
+            alert('Please select a category');
+            return;
+        }
+
+        // Clear form, subtasks, and close popup
+        taskForm.reset();
+        subtasksContainer.innerHTML = '';  // Clear subtasks
+        taskPopup.style.display = 'none';
+    });
+});
+
+
+          </script>
+                
+            
+                 <!-- Add this script at the bottom of your HTML file or in a separate JS file -->
+
+<script>
+    // Function to update the displayed message
+    function updateDurationMessage() {
+        const timeStartedInput = document.getElementById('time-started').value;
+        const selectedDuration = document.getElementById('dropdown-selected').innerText;
+
+        // Format time from 24-hour to 12-hour format
+        function formatTime(time) {
+            const [hours, minutes] = time.split(':').map(Number);
+            const period = hours >= 12 ? 'PM' : 'AM';
+            const formattedHours = ((hours + 11) % 12 + 1);
+            return `${formattedHours}:${minutes.toString().padStart(2, '0')} ${period}`;
+        }
+
+        const formattedTimeStarted = formatTime(timeStartedInput);
+
+        document.querySelector('.time-duration-msg').textContent = `Your task will start at ${formattedTimeStarted} and will take ${selectedDuration}.`;
+    }
+
+    // Event listener for the "set" button
+    document.querySelector('.valide-timer').addEventListener('click', function() {
+        updateDurationMessage();
+    });
+
+                    </script>
+                    
+<script src="../js/activelink.js"></script>
+<script src="../js/time.js"></script>
+<script src="../js/linecalendar.js"></script>
+<script src="../js/popuptasks.js"></script>
+<script src="../js/date.js"></script>
+<script src="../js/createtask.js"></script>
+
+
+</body>
+</html>

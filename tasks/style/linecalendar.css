@@ -1,0 +1,124 @@
+.line-calender{
+    margin-left: 1.9rem;
+    margin-top: 2.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5rem;  
+  box-shadow: 0.1rem  0.1rem 0.5rem 0.1rem #a1a0a0;  
+
+    width: 95%;  
+}
+#calendar {
+    margin-left: 2rem;
+    width:95%;
+    height: 90%;
+    margin-top: 1rem;
+      
+}
+#month-navigation {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:0.1rem;
+}
+.dayz span {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 2rem;
+    padding: 1.2rem;
+    text-align: center;
+    color:#333;
+}
+#month-navigation div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 29px;
+}
+#month-navigation span {
+    margin-top: 0.6rem;
+    padding: 0 7rem;
+}
+#month-navigation .current-month {
+    cursor: pointer;
+    color: #9aa5c7;
+    text-align: center;
+    color: #4e4e4e;
+    color: #5e5959;
+    font-family: poppins,sans-serif;
+    font-weight: 500;
+    margin-left: 1rem;
+    font-size: 1.5rem;
+    
+
+
+
+}
+#month-navigation .other-month {
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: #aaa;
+    font-size: 1.5rem;
+    text-align: center;
+    columns: #333;
+    font-family: poppins,sans-serif;
+    font-weight: 500;
+
+
+}
+#calendar-days {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    width: 100%; 
+    margin-top: 1.3rem;
+}
+
+#calendar-days div .day-num {
+    width: 8rem;
+    height: 4.4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+border-radius: 0.5rem;
+}
+.day-num:hover{
+    background-color:  #c2d8dd;
+    background-color:  #e6e5e3;
+
+}
+#calendar-days div.current-day {
+    background-color:  #e6e5e3;
+    color: #333; 
+    border-radius: 0.5rem;
+  box-shadow: 0.1rem  0.1rem 0.5rem 0.1rem #adadad;  
+
+}
+
+.day-name {
+    font-size: 1.2rem;
+    color:#616060;
+    padding-bottom: 0.1rem;
+    font-weight: 520;
+    margin-top: 1rem;
+    /* color: #838080; */
+
+}
+.day-number {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color:#747373;
+padding-bottom: 1rem;
+}
+.dayz{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

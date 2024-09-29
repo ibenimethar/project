@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management Calendar</title>
+    <style>
+    
+        #calendar {
+            width:50%;
+            text-align: center;
+        }
+        #month-navigation {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            margin-bottom:0.8rem;
+        }
+        .dayz button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        #month-navigation div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap:3rem;
+        }
+        #month-navigation span {
+            font-size: 18px;
+            font-weight: bold;
+            padding: 0 6rem;
+        }
+        #month-navigation .current-month {
+            cursor: pointer;
+            font-size: 2rem;
+            text-decoration: underline 0.1rem  #aaa;
+            color: #000;
+            font-weight: 300;
+            font-family: poppings;
+            padding-left: 11rem;
+
+
+
+        }
+        #month-navigation .other-month {
+            cursor: pointer;
+            color: #aaa;
+            font-size: 2rem;
+            font-weight: 100;
+            font-family: poppings;
+            
+
+
+        }
+        #calendar-days {
+            background-color: #d6d5d3;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.8rem;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            box-shadow: 0.1rem  0.1rem 0.8rem #d3cccc; 
+            padding: 1rem; 
+            width: 100%;
+            
+        }
+        #calendar-days.hidden {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        #calendar-days div .day-num {
+            width: 6rem;
+            height: 5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.5s ease;
+            box-shadow: 0.1rem  0.1rem 0.8rem #d3cccc; 
+
+
+        }
+
+        #calendar-days div.current-day {
+            background-color: #cbcbcb;
+            color: rgb(22, 21, 21); 
+            box-shadow: 0.1rem  0.1rem 7rem #626161;   
+        }
+        .day-num:hover{
+            background-color: #aaa;
+            box-shadow: 0.1rem  0.1rem 0.5rem #626161;   
+
+        }
+        
+        .day-name {
+            font-size:1rem;
+            font-weight: 300;
+            color: rgb(22, 21, 21);
+            font-family: Cambria, serif;
+            padding-bottom: 1rem;
+
+        }
+        .day-number {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+        .dayz{
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div id="calendar">
+        <div id="month-navigation">
+            <div id="month-names">
+                <span id="prev-month-name" class="other-month"></span>
+                <span id="current-month-name" class="current-month"></span>
+                <span id="next-month-name" class="other-month"></span>
+            </div>
+        </div>
+        <div class="dayz">
+            <button id="prev-month"><</button>
+            <div id="calendar-days"></div>
+            <button id="next-month">></button>
+        </div>
+    </div>
+
+    <script>
+            var calendarDaysElem = document.getElementById('calendar-days');
+            var currentMonthElem = document.getElementById('current-month-name');
+            var prevMonthElem = document.getElementById('prev-month-name');
+            var nextMonthElem = document.getElementById('next-month-name');
+            var prevMonthBtn = document.getElementById('prev-month');
+            var nextMonthBtn = document.getElementById('next-month');
+
+            var currentDate = new Date();
+            var startDate = new Date(currentDate);
+            startDate.setDate(currentDate.getDate() - 3);
+
+            function renderCalendar() {
+                calendarDaysElem.classList.add('hidden');
+                setTimeout(function() {
+                    calendarDaysElem.innerHTML = '';
+                    for (var i = 0; i < 7; i++) {
+                        var day = new Date(startDate);
+                        day.setDate(startDate.getDate() + i);
+
+                        var dayElem = document.createElement('div');
+                        dayElem.innerHTML = `
+                        <div class="day-num">
+                            <div class="day-name">${day.toLocaleDateString('en-US', { weekday: 'short' })}</div>
+                            <div class="day-number">${day.getDate()}</div>
+                            </div>
+                            `;
+                        if (day.toDateString() === currentDate.toDateString()) {
+                            dayElem.classList.add('current-day');
+                        }
+
+                        calendarDaysElem.appendChild(dayElem);
+                    }
+                    calendarDaysElem.classList.remove('hidden');
+                    updateMonthNames();
+                }, 500);
+            }
+
+            function updateMonthNames() {
+                var prevMonth = new Date(startDate);
+                prevMonth.setMonth(startDate.getMonth() - 1);
+                var nextMonth = new Date(startDate);
+                nextMonth.setMonth(startDate.getMonth() + 1);
+
+                prevMonthElem.textContent = prevMonth.toLocaleDateString('en-US', { month: 'long' });
+                currentMonthElem.textContent = startDate.toLocaleDateString('en-US', { month: 'long' });
+                nextMonthElem.textContent = nextMonth.toLocaleDateString('en-US', { month: 'long' });
+            }
+
+            function updateCalendar(day) {
+                startDate.setDate(startDate.getDate() + day);
+                renderCalendar();
+            }
+
+            prevMonthBtn.addEventListener('click', function() {
+                updateCalendar(-7);
+            });
+            nextMonthBtn.addEventListener('click', function() {
+                updateCalendar(7);
+            });
+            prevMonthElem.addEventListener('click', function() {
+                updateCalendar(-30);
+            });
+            nextMonthElem.addEventListener('click', function() {
+                updateCalendar(30);
+            });
+
+            renderCalendar();
+        // });
+    </script>
+</body>
+</html>

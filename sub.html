@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .task-container {
+            margin: 20px;
+        }
+        .task-input {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .subtasks-container {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 150px; /* Set the maximum height for the subtasks container */
+            overflow-y: auto; /* Enable vertical scrolling */
+            scrollbar-width: none; /* Hide scrollbar in Firefox */
+        }
+        .subtasks-container::-webkit-scrollbar {
+            display: none; /* Hide scrollbar in WebKit browsers */
+        }
+        .subtask-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box; /* Ensure padding does not increase width */
+        }
+        .add-subtask-btn, .create-task-btn {
+            margin: 5px 0;
+            padding: 10px 15px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .add-subtask-btn:hover, .create-task-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="task-container">
+    <h2>Create a Task</h2>
+    <input type="text" id="taskInput" class="task-input" placeholder="Enter task name">
+    
+    <div id="subtasksContainer" class="subtasks-container">
+        <!-- Subtasks will be added here dynamically -->
+    </div>
+    
+    <button id="addSubtaskBtn" class="add-subtask-btn">Add Subtask</button>
+    <button id="createTaskBtn" class="create-task-btn">Create Task</button>
+</div>
+
+<script>
+    let subtaskCount = 0;
+    document.getElementById('addSubtaskBtn').addEventListener('click', function() {
+        subtaskCount++;
+        
+        const subtaskInput = document.createElement('input');
+        subtaskInput.type = 'text';
+        subtaskInput.placeholder = 'Enter subtask ' + subtaskCount;
+        subtaskInput.className = 'subtask-input';
+        
+        document.getElementById('subtasksContainer').appendChild(subtaskInput);
+    });
+
+    // Function to create the task with subtasks
+    // document.getElementById('createTaskBtn').addEventListener('click', function() {
+    //     const taskName = document.getElementById('taskInput').value;
+    //     let subtasks = [];
+        
+    //     for (let i = 1; i <= subtaskCount; i++) {
+    //         const subtaskValue = document.getElementById('subtask' + i).value;
+    //         if (subtaskValue) {
+    //             subtasks.push(subtaskValue);
+    //         }
+    //     }
+        
+    //     console.log('Task:', taskName);
+    //     console.log('Subtasks:', subtasks);
+        
+    //     // Here you can handle the task creation logic, e.g., sending data to the server
+    // });
+</script>
+
+</body>
+</html>

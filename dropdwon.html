@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickable Dropdown Menu</title>
+    <style>
+    /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-button {
+    background-color: #2a2f2a;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    position: relative;
+}
+
+.dropdown-button:hover {
+    background-color: #45a049;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #220404;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-left: 1px solid #ddd; /* Border on the left side */
+    border-right: 1px solid #ddd; /* Border on the right side */
+    border-top: 1px solid #ddd; /* Border on the top side */
+    border-bottom: none; /* Remove the border from the bottom */
+    border-radius: 4px; /* Optional: rounded corners for dropdown content */
+    top: 100%; /* Positions the dropdown directly below the button */
+    left: 50%; /* Center the dropdown horizontally */
+    transform: translateX(-50%); /* Adjust position to ensure centering */
+    padding: 10px 0; /* Optional: padding around content */
+    margin-top: 20px; /* Increased space between button and dropdown content */
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown-content::before {
+    content: '';
+    position: absolute;
+    bottom: 100%; /* Position the arrow above the dropdown */
+    left: 50%; /* Center the arrow horizontally */
+    transform: translateX(-50%); /* Adjust position to ensure centering */
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #707070; /* Matches the dropdown content background color */
+    border-top: none;
+}
+
+    </style>
+</head>
+<body>
+    <div class="dropdown">
+        <button class="dropdown-button">Option</button>
+        <div class="dropdown-content" id="dropdown-content">
+            <a href="#">Item 1</a>
+            <a href="#">Item 2</a>
+            <a href="#">Item 3</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropdownButton = document.querySelector('.dropdown-button');
+            const dropdownContent = document.getElementById('dropdown-content');
+            
+            dropdownButton.addEventListener('click', (event) => {
+                event.stopPropagation(); // Prevents click event from closing the dropdown immediately
+                dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+            });
+
+            document.addEventListener('click', () => {
+                dropdownContent.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

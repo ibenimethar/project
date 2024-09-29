@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner:wght@400..700&family=New+Amsterdam&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+  
+body {
+    background-color: black;
+    color: antiquewhite;
+
+
+   
+}
+ .backround{
+        background-color: black;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height:500vh;
+        background-image:url('../assets/image.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: -1;
+        filter: blur(10px);
+     }
+     .container{
+    min-height: 110vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+     }
+     .nav { 
+    z-index: 20;
+position: sticky;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    position: absolute;
+    top: 0;
+    line-height: 100px;
+    color: #e0e0e0; /* Light gray */
+    justify-content: space-around;
+}
+.nav-menu ul {
+    display: flex;
+}
+.nav-menu ul li {
+    list-style-type: none;
+}
+.nav-menu ul li .link {
+    text-decoration: none;
+    font-weight: 500;
+    color: #e0e0e0; /* Light gray */
+    margin: 0 80px;
+}
+.link:hover, .active {
+    border-bottom: 2px solid #b0b0b0; /* Slightly darker light gray */
+}
+#web-name {
+    width: 35%;
+}
+   
+#web-name p {
+    display: flex;
+    color: white;
+    background-image: url('../assets/sky.png');
+color: transparent;
+background-position: center;
+font-size:25px;
+font-family: 'Arial', sans-serif;
+background-clip: text;
+letter-spacing:2px;
+font-weight: 600;
+margin-left:4vw;
+}
+#web-name span {
+    margin: 5px;
+    position: relative;
+    display: inline-block; 
+    width: 0.8em;
+    height: 0.8em;
+    background-color: rgb(191, 184, 174);
+    border-radius: 50%;
+    box-shadow: 0 0 9px rgba(255, 255, 255, 0.8), 0 0 25px rgba(255, 255, 255, 0.5), 0 0 25px rgba(255, 255, 255, 0.3);
+    top:34px; 
+    transition: transform 0.3s;
+} 
+
+
+.small{
+text-align: center;
+ font-size:30px;
+ padding-bottom:1vh;
+font-family: 'Times New Roman', Times, serif;
+font-style: italic;
+font-family:700;
+letter-spacing: 3px;     
+ text-decoration: underline;
+
+}
+/************************header********************************/
+
+.header {
+margin-top: 5%;
+padding: 16px;
+height: 95vh; 
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.header .intro{
+text-align: center;
+border: none;
+padding: 19px;
+font-family: 'Lucida Sans', 'Lucida Sans Regular', sans-serif;
+font-size: 20px;
+font-style: italic;
+text-shadow: 
+0 0 6px rgba(70, 68, 65, 0.7), 
+0 0 10px rgba(180, 180, 180, 0.5);
+
+}
+ 
+.bigtitle{
+font-size: 73px;
+font-family: Arial, Helvetica, sans-serif;
+font-weight: 800;
+color: white;
+
+background-image: url('../assets/sky.png');
+color: transparent;
+ background-clip: text;
+padding: 10px 20px;
+text-align: center;
+
+}
+.smalltitle{
+padding: 10px 30px;
+/* padding-top:10px; */
+text-align: center;
+font-size:25px;
+font-family: 'Times New Roman', Times, serif;
+font-style: italic;
+font-family:700;
+letter-spacing: 2px;
+
+}
+/***************************************************************/
+
+.start{
+padding:  50px 10px 55px 10px;
+width: 100%;
+text-shadow: 
+0 0 6px rgba(195, 194, 194, 0.7), 
+0 0 10px rgba(180, 180, 180, 0.5);
+font-size: 19px;
+font-weight:200;
+border: solid 1px wheat;
+padding-left: 4%;
+
+}
+
+
+
+.box-btn .btn{
+padding: 13px;
+width:45%;
+ font-size:22px;
+font-family: 'Times New Roman', Times, serif;
+font-style: italic;
+font-weight:600;
+border: none;
+border-radius: 10px;
+outline: none;
+background: rgba(126, 122, 124, 0.919);
+cursor: pointer;
+
+}
+
+/****************************************************paragrph************************************/
+.p-box p{
+text-align: center;
+width: 100%;
+padding:  50px 10px 55px 10px;
+font-family: 'Lucida Sans', 'Lucida Sans Regular', sans-serif;
+font-weight: 400;
+font-size:19px;
+font-style: italic;
+text-shadow: 
+0 0 6px rgba(195, 194, 194, 0.7), 
+0 0 10px rgba(180, 180, 180, 0.5);
+border: solid 1px wheat;
+}
+.p-box  .opp{
+padding: 51px;
+
+}
+
+.p-box {
+    justify-content: flex-start;
+display: flex;
+justify-content: center;
+align-items: center;
+padding:15px;
+gap: 10px;
+width:100%;
+margin: 50px auto;
+}
+/*****************************************************/
+a{ 
+color: rgb(0, 0, 0);
+text-decoration: none;
+}
+.p-box .under{
+border:dotted wheat;
+padding-bottom: 130px;
+}
+.box-btn {
+margin-top:-180px !important;
+}
+.p-box .up{
+font-size:22px;
+font-family: 'Times New Roman', Times, serif;
+font-style: italic;
+font-weight:600;
+color: aliceblue;
+text-decoration: overline;
+}

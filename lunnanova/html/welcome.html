@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="../style/welcome.css">
+
+</head>
+<body>
+    <div class="backround"></div>
+    <div class="container">
+
+        <nav class="nav">
+            <div id="web-name">
+                <p>LUNNAN<span></span>VA</p>
+            </div>
+            <div class="nav-menu" id="nav-Menu">
+                <ul>
+                    <li><a href="home.html" class="link">Home</a></li>
+                    <li><a href="#" class="link active">Welcome</a></li>
+                    <li><a href="feedback.html" class="link">Feedback</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="header">
+            <h1 class="bigtitle">WELCOME TO LUNNANOVA</h1>
+            <h3 class="smalltitle">Your Ultimate Task Management Solution,Transform Your Task Management with Ease</h3>
+            <p class="intro">
+                lunnanova is an intuitive online platform designed to help you streamline your daily tasks and achieve your goals effortlessly. With its user-friendly interface
+               and powerful  features ,lunnanova allows you to organize, prioritize, and track your activities in one place. Whether you're managing personal projects or
+                coordinating a  busy work schedule lunnanova is your go-to tool for staying on top of everything.Experience a new level of productivity and
+                 peace of mind as lunnanova helps you turn your plans into action!</p>
+        </div>
+        <div class="p-box">
+            <h2 class="small">Why Lunnanova?</h2></div>
+            <div class="p-box">
+                <p>
+                  At Lunnanova, we believe in simplifying task management. Our platform centralizes all your tasks and projects in one place, ensuring that nothing
+                  falls through the cracks. Say goodbye to the clutter and chaos of traditional task lists—Lunnanova is here to help you stay 
+                  on top of your priorities and achieve your goals faster.
+                </p>
+            </div>
+        <div class="p-box">
+          <h2 class="small">Comprehensive Organization: Everything in One Place</h2></div>
+        <div class="p-box">
+            <p>With Lunnanova, all your tasks and projects are centralized in one easy-to-navigate platform. This comprehensive organization ensures that you never lose
+                 track of your commitments, allowing you to focus on what truly matters. Whether it's personal tasks or work projects
+                 everything is neatly organized and easily accessible.</p>
+        </div>
+
+            <div class="p-box">
+
+            <h2 class="small">Effective Prioritization: Focus on What Matters</h2></div>
+        <div class="p-box">
+            <p>
+                Lunnanova makes it simple to set and manage priorities. Our intuitive tools help you align your dailytasks with your long-term goals, ensuring that you're always 
+                working on what's most important. Withclear priorities, you can make the most of your time and achieve more in
+                less time.
+            </p>
+        </div>
+        <div class="p-box">
+
+            <h2 class="small">Advanced Tracking: Monitor Your Progress</h2></div>
+        <div class="p-box">
+            <p>Track your progress with Lunnanova's detailed insights and analytics. Our advanced tracking features provide you with the data you need to make informed decisions
+                 adjust your strategies, and stay  motivated as you work towards your goals. Experience the satisfaction of seeing your
+                 progress in real-time.</p>
+        </div>
+
+        <div class="p-box">
+
+            <h2 class="small">User Testimonials: Hear from Our Users</h2>
+        </div>
+        <div class="p-box">
+            <p >“Lunnanova has transformed the way I manage my day-to-day tasks The
+        user-friendly interface and comprehensive features have helped me stay 
+         organized and  productive like never before.” — Jane Doe, Freelance Designer</p>
+          <p class="opp">“Thanks to Lunnanova, I've been able to prioritize my work more effectively
+                leading to significant improvements in my productivity. It's a game-changer!”
+                 — John Smith, Project Manager
+                <br></p></div>
+            <div class="p-box">
+                <h2 class="small">How It Works: Getting Started with Lunnanova</h2></div>
+            <div class="p-box">
+                <ol class="start">
+                    <li>Create an Account: Register to unlock the full potential of Lunnanova and start your journey to better task management.</li>
+                    <li>Setup Your Dashboard: Customize your workspace to fit your specific needs. Whether you prefer a minimalistic view or a detailed setup, Lunnanova adapts to your style.</li>
+                    <li>Manage Your Tasks: Start organizing, prioritizing, and tracking your activities with our powerful tools. Lunnanova makes it easy to stay on top of everything.</li>
+                </ol>
+            </div>
+            <div class="p-box">
+            <h2 class="small">Ready to Transform Your Productivity?</h2></div>
+           <div class="p-box" >
+            <p class="under">
+                Are you ready to take your task management to the next level? Join Lunnanova today and experience the difference.
+                 With our powerful features and user-friendly design, you'll wonder how you ever managed without it.</p></div>
+            <div class="p-box box-btn">
+        
+                <button class="btn" ><a href="home.html">Gest Started</a></button>
+            </div>
+            <div class="p-box">
+                <a class="up" href="#nav-Menu">up</a>
+            </div></div> </body>
+            <script>
+
+                const SpanElement = document.querySelector('#web-name span ');
+                function pulse(){
+                    SpanElement.style.transform = 'scale(1.2)';
+                    SpanElement.style.boxShadow= '0 0 9px rgba(255, 255, 255, 0.8),  0 0 25px rgba(255, 255, 255, 0.5),0 0 25px rgba(255, 255, 255, 0.3);';
+                  setTimeout(function(){
+                    SpanElement.style.transform = 'scale(1)';
+                    SpanElement.style.boxShadow= '0 0 10px rgba(255, 255, 255, 0.8),  0 0 30px rgba(255, 255, 255, 0.5),0 0 35px rgba(255, 255, 255, 0.3);' },500)
+            
+                }
+                setInterval(pulse,1000);
+            
+                var a = document.getElementById()
+              
+              </script>
+             <script>
+                 var a = document.getElementById("loginBtn");
+                var b = document.getElementById("registerBtn");
+                var x = document.getElementById("login");
+                var y = document.getElementById("register");
+            
+                function login() {
+                    x.style.left = "4px";
+                    y.style.right = "-520px";
+                    a.className += " right-btn";
+                    b.className = "btn";
+                    x.style.opacity = 1;
+                    y.style.opacity = 0;
+                }
+            
+                function register() {
+                    x.style.left = "-510px";
+                    y.style.right = "5px";
+                    a.className = "btn";
+                    b.className += " right-btn";
+                    x.style.opacity = 0;
+                    y.style.opacity = 1;
+                }
+            
+            </script></body></html>
+ 

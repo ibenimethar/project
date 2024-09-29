@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        .tab-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* Ensures that only the active tab's content is visible */
+        }
+
+        .tabs {
+            display: flex;
+            background-color: #e0e0e0;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 14px 20px;
+            background-color: #ddd;
+            border: none;
+            border-radius: 8px 8px 0 0;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .tab-button:hover {
+            background-color: #ccc;
+        }
+
+        .tab-button.active {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab-content {
+            height: auto;
+            padding: 20px;
+        }
+
+        .tab-content-item {
+            display: none;
+            padding: 15px;
+            height: 100%;
+        }
+
+        .tab-content-item.active {
+            display: block;
+        }
+
+        .scrollable-content {
+            height: 400px; /* Fixed height for scrollable content */
+            overflow-y: auto; /* Makes the content scrollable */
+        }
+
+        .add-task-form {
+            margin-bottom: 20px;
+        }
+
+        .add-task-form input[type="text"],
+        .add-task-form select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .add-task-form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-task-form button:hover {
+            background-color: #0056b3;
+        }
+
+        .task-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .task-list li {
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 600px) {
+            .tab-button {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .tab-content-item {
+                padding: 10px;
+            }
+
+            .add-task-form input[type="text"],
+            .add-task-form select,
+            .add-task-form button {
+                width: 100%;
+                padding: 8px;
+            }
+
+            .scrollable-content {
+                height: 300px; /* Adjust the height for smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tab-container">
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('add-task')">Add Task</button>
+            <button class="tab-button" onclick="showTab('important')">Important</button>
+            <button class="tab-button" onclick="showTab('optional')">Optional</button>
+            <button class="tab-button" onclick="showTab('can-wait')">Can Wait</button>
+        </div>
+        <div class="tab-content">
+            <div id="add-task" class="tab-content-item active">
+                <div class="add-task-form">
+                    <input type="text" id="task-input" placeholder="Enter your task">
+                    <select id="task-category">
+                        <option value="important">Important</option>
+                        <option value="optional">Optional</option>
+                        <option value="can-wait">Can Wait</option>
+                    </select>
+                    <button onclick="addTask()">Add Task</button>
+                </div>
+            </div>
+            <div id="important" class="tab-content-item">
+                <div class="scrollable-content">
+                    <h3>Important Tasks</h3>
+                    <ul id="important-tasks" class="task-list"></ul>
+                </div>
+            </div>
+            <div id="optional" class="tab-content-item">
+                <div class="scrollable-content">
+                    <h3>Optional Tasks</h3>
+                    <ul id="optional-tasks" class="task-list"></ul>
+                </div>
+            </div>
+            <div id="can-wait" class="tab-content-item">
+                <div class="scrollable-content">
+                    <h3>Can Wait Tasks</h3>
+                    <ul id="can-wait-tasks" class="task-list"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            const contents = document.querySelectorAll('.tab-content-item');
+            contents.forEach(content => {
+                if (content.id === tabId) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => {
+                if (button.textContent.toLowerCase().replace(' ', '-') === tabId) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+        }
+
+        function addTask() {
+            const input = document.getElementById('task-input');
+            const category = document.getElementById('task-category').value;
+            const taskText = input.value.trim();
+            if (taskText) {
+                const taskList = document.getElementById(`${category}-tasks`);
+                const newTask = document.createElement('li');
+                newTask.textContent = taskText;
+                taskList.appendChild(newTask);
+                input.value = ''; // Clear input
+                showTab('add-task'); // Ensure "Add Task" tab remains active
+            }
+        }
+
+        // Initialize the first tab as active
+        document.addEventListener('DOMContentLoaded', () => {
+            showTab('add-task'); // Set "Add Task" tab as default
+        });
+    </script>
+</body>
+
+
+
+
+
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+}
+
+input, textarea {
+    margin-top: 5px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+} 
+</html>

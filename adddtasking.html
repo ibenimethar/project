@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .task-input {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .task-input input {
+            flex: 1;
+            padding: 8px;
+            font-size: 16px;
+        }
+        .task-input button {
+            padding: 8px 12px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .task-display {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .task-rectangle {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .task-rectangle:hover {
+            background-color: #f9f9f9;
+        }
+        .task-name {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .task-duration {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+        .start-timer-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        /* Popup Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 400px;
+            max-width: 90%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+            border-radius: 5px;
+            z-index: 1000;
+        }
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .popup-header .task-icon {
+            font-size: 20px;
+        }
+        .subtasks {
+            margin-top: 15px;
+        }
+        .subtasks ul {
+            list-style: none;
+            padding: 0;
+        }
+        .subtasks li {
+            margin-bottom: 5px;
+        }
+        .add-subtask {
+            margin-top: 10px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .time-display {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #333;
+        }
+        .popup-close {
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        /* Overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="task-input">
+        <input type="text" id="task-name" placeholder="Enter task name">
+        <button id="dropdown-button">Start Time & Duration</button>
+        <button id="subtasks-button">Add Subtasks</button>
+        <button id="timer-button">Set Timer</button>
+        <button id="category-button">Category</button>
+        <button id="add-task-button">+</button>
+    </div>
+
+    <div class="task-display" id="task-display">
+        <!-- Tasks will be added here -->
+    </div>
+
+    <!-- Popup -->
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="task-popup">
+        <div class="popup-header">
+            <span class="task-name" id="popup-task-name">Task Name</span>
+            <span class="task-icon">&#x1F551;</span>
+            <span class="popup-close" id="popup-close">&times;</span>
+        </div>
+        <div class="subtasks">
+            <ul id="popup-subtasks">
+                <!-- Subtasks will be listed here -->
+            </ul>
+            <button class="add-subtask" id="add-subtask-button">+ Add Subtask</button>
+        </div>
+        <div class="time-display" id="popup-time-display">
+            12:00 AM - 2:30 AM
+        </div>
+    </div>
+
+    <script>
+        // Data Structure
+        let tasks = [];
+        let currentTaskId = 0;
+
+        // Elements
+        const addTaskButton = document.getElementById('add-task-button');
+        const taskDisplay = document.getElementById('task-display');
+        const overlay = document.getElementById('overlay');
+        const popup = document.getElementById('task-popup');
+        const popupClose = document.getElementById('popup-close');
+        const popupTaskName = document.getElementById('popup-task-name');
+        const popupSubtasks = document.getElementById('popup-subtasks');
+        const addSubtaskButton = document.getElementById('add-subtask-button');
+        const popupTimeDisplay = document.getElementById('popup-time-display');
+
+        // Dropdown Elements
+        const dropdownButton = document.getElementById('dropdown-button');
+        const categoryButton = document.getElementById('category-button');
+
+        // State
+        let selectedTaskId = null;
+
+        // Event Listeners
+        addTaskButton.addEventListener('click', addTask);
+        popupClose.addEventListener('click', closePopup);
+        overlay.addEventListener('click', closePopup);
+        addSubtaskButton.addEventListener('click', addSubtaskToPopup);
+        dropdownButton.addEventListener('click', toggleDropdown);
+        categoryButton.addEventListener('click', toggleCategoryDropdown);
+
+        // Functions
+        function addTask() {
+            const taskNameInput = document.getElementById('task-name');
+            const taskName = taskNameInput.value.trim();
+            if (taskName === '') return;
+
+            const task = {
+                id: currentTaskId++,
+                name: taskName,
+                duration: '1 hour',
+                category: 'Optional',
+                subtasks: [],
+                timer: null,
+                timeRange: '12:00 AM - 1:00 AM'
+            };
+            tasks.push(task);
+            renderTask(task);
+            taskNameInput.value = '';
+        }
+
+        function renderTask(task) {
+            const taskRect = document.createElement('div');
+            taskRect.className = 'task-rectangle';
+            taskRect.dataset.id = task.id;
+
+            const taskName = document.createElement('div');
+            taskName.className = 'task-name';
+            taskName.textContent = task.name;
+
+            const taskDuration = document.createElement('div');
+            taskDuration.className = 'task-duration';
+            taskDuration.textContent = `Duration: ${task.duration}`;
+
+            const startTimerBtn = document.createElement('button');
+            startTimerBtn.className = 'start-timer-button';
+            startTimerBtn.textContent = 'Start Timer';
+            startTimerBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                startTimer(task.id, taskDuration);
+            });
+
+            taskRect.appendChild(taskName);
+            taskRect.appendChild(taskDuration);
+            taskRect.appendChild(startTimerBtn);
+
+            taskRect.addEventListener('click', () => openPopup(task.id));
+
+            taskDisplay.appendChild(taskRect);
+        }
+
+        function openPopup(taskId) {
+            selectedTaskId = taskId;
+            const task = tasks.find(t => t.id === taskId);
+            if (!task) return;
+
+            popupTaskName.textContent = task.name;
+            popupTimeDisplay.textContent = task.timeRange;
+            renderSubtasks(task.subtasks);
+            overlay.style.display = 'block';
+            popup.style.display = 'block';
+        }
+
+        function closePopup() {
+            overlay.style.display = 'none';
+            popup.style.display = 'none';
+            selectedTaskId = null;
+        }
+
+        function renderSubtasks(subtasks) {
+            popupSubtasks.innerHTML = '';
+            subtasks.forEach(sub => {
+                const li = document.createElement('li');
+                li.textContent = sub;
+                popupSubtasks.appendChild(li);
+            });
+        }
+
+        function addSubtaskToPopup() {
+            const subtask = prompt('Enter subtask:');
+            if (subtask && selectedTaskId !== null) {
+                const task = tasks.find(t => t.id === selectedTaskId);
+                if (task) {
+                    task.subtasks.push(subtask);
+                    renderSubtasks(task.subtasks);
+                }
+            }
+        }
+
+        function toggleDropdown() {
+            const dropdown = document.createElement('div');
+            dropdown.className = 'dropdown';
+            dropdown.style.position = 'absolute';
+            dropdown.style.background = '#fff';
+            dropdown.style.border = '1px solid #ccc';
+            dropdown.style.padding = '10px';
+            dropdown.style.zIndex = 1001;
+
+            const startTimeLabel = document.createElement('label');
+            startTimeLabel.textContent = 'Start Time: ';
+            const startTimeInput = document.createElement('input');
+            startTimeInput.type = 'time';
+            startTimeInput.id = 'start-time';
+
+            const durationLabel = document.createElement('label');
+            durationLabel.textContent = ' Duration: ';
+            const durationInput = document.createElement('input');
+            durationInput.type = 'number';
+            durationInput.min = '1';
+            durationInput.value = '1';
+            durationInput.id = 'duration';
+
+            const saveBtn = document.createElement('button');
+            saveBtn.textContent = 'Save';
+            saveBtn.style.marginTop = '10px';
+            saveBtn.addEventListener('click', () => {
+                const startTime = startTimeInput.value || '12:00 AM';
+                const duration = durationInput.value + ' hour(s)';
+                dropdown.remove();
+                dropdownButton.textContent = `Start: ${startTime}, Dur: ${duration}`;
+            });
+
+            dropdown.appendChild(startTimeLabel);
+            dropdown.appendChild(startTimeInput);
+            dropdown.appendChild(durationLabel);
+            dropdown.appendChild(durationInput);
+            dropdown.appendChild(document.createElement('br'));
+            dropdown.appendChild(saveBtn);
+
+            document.body.appendChild(dropdown);
+
+            const rect = dropdownButton.getBoundingClientRect();
+            dropdown.style.top = rect.bottom + 'px';
+            dropdown.style.left = rect.left + 'px';
+
+            document.addEventListener('click', function handler(e) {
+                if (!dropdown.contains(e.target) && e.target !== dropdownButton) {
+                    dropdown.remove();
+                    document.removeEventListener('click', handler);
+                }
+            });
+        }
+
+        function toggleCategoryDropdown() {
+            const categories = ['Important', 'Optional', 'Wait'];
+            const dropdown = document.createElement('div');
+            dropdown.className = 'dropdown';
+            dropdown.style.position = 'absolute';
+            dropdown.style.background = '#fff';
+            dropdown.style.border = '1px solid #ccc';
+            dropdown.style.padding = '10px';
+            dropdown.style.zIndex = 1001;
+
+            categories.forEach(cat => {
+                const btn = document.createElement('button');
+                btn.textContent = cat;
+                btn.style.display = 'block';
+                btn.style.width = '100%';
+                btn.style.marginBottom = '5px';
+                btn.addEventListener('click', () => {
+                    categoryButton.textContent = cat;
+                    dropdown.remove();
+                });
+                dropdown.appendChild(btn);
+            });
+
+            document.body.appendChild(dropdown);
+
+            const rect = categoryButton.getBoundingClientRect();
+            dropdown.style.top = rect.bottom + 'px';
+            dropdown.style.left = rect.left + 'px';
+
+            document.addEventListener('click', function handler(e) {
+                if (!dropdown.contains(e.target) && e.target !== categoryButton) {
+                    dropdown.remove();
+                    document.removeEventListener('click', handler);
+                }
+            });
+        }
+
+        function startTimer(taskId, durationElement) {
+            const task = tasks.find(t => t.id === taskId);
+            if (!task) return;
+
+            if (task.timer) {
+                clearInterval(task.timer);
+            }
+
+            let [hours, minutes] = task.duration.split(' ')[0].split(':').map(Number);
+            let totalSeconds = (hours * 60 + minutes) * 60;
+
+            function updateTimer() {
+                if (totalSeconds <= 0) {
+                    clearInterval(task.timer);
+                    durationElement.textContent = 'Time\'s up!';
+                    return;
+                }
+                totalSeconds--;
+                const hrs = Math.floor(totalSeconds / 3600);
+                const mins = Math.floor((totalSeconds % 3600) / 60);
+                const secs = totalSeconds % 60;
+                durationElement.textContent = `Duration: ${hrs}h ${mins}m ${secs}s`;
+            }
+
+            task.timer = setInterval(updateTimer, 1000);
+        }
+    </script>
+
+</body>
+</html>
